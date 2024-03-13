@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="StationeryID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MsStationery">
+          <Key>
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="StationeryID" Type="int" Nullable="false" />
+          <Property Name="StationeryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StationeryPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MsUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserGender" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="UserDOB" Type="date" Nullable="false" />
+          <Property Name="UserPhone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="UserAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRole" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" Nullable="false" />
+          <Property Name="StationeryID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionHeader">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cart_MsStationery">
+          <End Role="MsStationery" Type="Self.MsStationery" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsStationery">
+              <PropertyRef Name="StationeryID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="StationeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_MsUser">
+          <End Role="MsUser" Type="Self.MsUser" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_MsStationery">
+          <End Role="MsStationery" Type="Self.MsStationery" Multiplicity="1" />
+          <End Role="TransactionDetail" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsStationery">
+              <PropertyRef Name="StationeryID" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="StationeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_TransactionHeader">
+          <End Role="TransactionHeader" Type="Self.TransactionHeader" Multiplicity="1" />
+          <End Role="TransactionDetail" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionHeader">
+              <PropertyRef Name="TransactionID" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionHeader_MsUser">
+          <End Role="MsUser" Type="Self.MsUser" Multiplicity="1" />
+          <End Role="TransactionHeader" Type="Self.TransactionHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TransactionHeader">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MsStationery" EntityType="Self.MsStationery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MsUser" EntityType="Self.MsUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetail" EntityType="Self.TransactionDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionHeader" EntityType="Self.TransactionHeader" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_MsStationery" Association="Self.FK_Cart_MsStationery">
+            <End Role="MsStationery" EntitySet="MsStationery" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_MsUser" Association="Self.FK_Cart_MsUser">
+            <End Role="MsUser" EntitySet="MsUser" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_MsStationery" Association="Self.FK_TransactionDetail_MsStationery">
+            <End Role="MsStationery" EntitySet="MsStationery" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_TransactionHeader" Association="Self.FK_TransactionDetail_TransactionHeader">
+            <End Role="TransactionHeader" EntitySet="TransactionHeader" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionHeader_MsUser" Association="Self.FK_TransactionHeader_MsUser">
+            <End Role="MsUser" EntitySet="MsUser" />
+            <End Role="TransactionHeader" EntitySet="TransactionHeader" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="StationeryID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MsStationery" Relationship="Self.FK_Cart_MsStationery" FromRole="Cart" ToRole="MsStationery" />
+          <NavigationProperty Name="MsUser" Relationship="Self.FK_Cart_MsUser" FromRole="Cart" ToRole="MsUser" />
+        </EntityType>
+        <EntityType Name="MsStationery">
+          <Key>
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="StationeryID" Type="Int32" Nullable="false" />
+          <Property Name="StationeryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StationeryPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_MsStationery" FromRole="MsStationery" ToRole="Cart" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK_TransactionDetail_MsStationery" FromRole="MsStationery" ToRole="TransactionDetail" />
+        </EntityType>
+        <EntityType Name="MsUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserGender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserDOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserRole" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_MsUser" FromRole="MsUser" ToRole="Cart" />
+          <NavigationProperty Name="TransactionHeaders" Relationship="Self.FK_TransactionHeader_MsUser" FromRole="MsUser" ToRole="TransactionHeader" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+            <PropertyRef Name="StationeryID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" />
+          <Property Name="StationeryID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MsStationery" Relationship="Self.FK_TransactionDetail_MsStationery" FromRole="TransactionDetail" ToRole="MsStationery" />
+          <NavigationProperty Name="TransactionHeader" Relationship="Self.FK_TransactionDetail_TransactionHeader" FromRole="TransactionDetail" ToRole="TransactionHeader" />
+        </EntityType>
+        <EntityType Name="TransactionHeader">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MsUser" Relationship="Self.FK_TransactionHeader_MsUser" FromRole="TransactionHeader" ToRole="MsUser" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK_TransactionDetail_TransactionHeader" FromRole="TransactionHeader" ToRole="TransactionDetail" />
+        </EntityType>
+        <Association Name="FK_Cart_MsStationery">
+          <End Role="MsStationery" Type="Self.MsStationery" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsStationery">
+              <PropertyRef Name="StationeryID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="StationeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_MsUser">
+          <End Role="MsUser" Type="Self.MsUser" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_MsStationery">
+          <End Role="MsStationery" Type="Self.MsStationery" Multiplicity="1" />
+          <End Role="TransactionDetail" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsStationery">
+              <PropertyRef Name="StationeryID" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="StationeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionHeader_MsUser">
+          <End Role="MsUser" Type="Self.MsUser" Multiplicity="1" />
+          <End Role="TransactionHeader" Type="Self.TransactionHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TransactionHeader">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_TransactionHeader">
+          <End Role="TransactionHeader" Type="Self.TransactionHeader" Multiplicity="1" />
+          <End Role="TransactionDetail" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionHeader">
+              <PropertyRef Name="TransactionID" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="MsStationeries" EntityType="Self.MsStationery" />
+          <EntitySet Name="MsUsers" EntityType="Self.MsUser" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetail" />
+          <EntitySet Name="TransactionHeaders" EntityType="Self.TransactionHeader" />
+          <AssociationSet Name="FK_Cart_MsStationery" Association="Self.FK_Cart_MsStationery">
+            <End Role="MsStationery" EntitySet="MsStationeries" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_MsUser" Association="Self.FK_Cart_MsUser">
+            <End Role="MsUser" EntitySet="MsUsers" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_MsStationery" Association="Self.FK_TransactionDetail_MsStationery">
+            <End Role="MsStationery" EntitySet="MsStationeries" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionHeader_MsUser" Association="Self.FK_TransactionHeader_MsUser">
+            <End Role="MsUser" EntitySet="MsUsers" />
+            <End Role="TransactionHeader" EntitySet="TransactionHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_TransactionHeader" Association="Self.FK_TransactionDetail_TransactionHeader">
+            <End Role="TransactionHeader" EntitySet="TransactionHeaders" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="DatabaseModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsStationeries">
+            <EntityTypeMapping TypeName="DatabaseModel.MsStationery">
+              <MappingFragment StoreEntitySet="MsStationery">
+                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
+                <ScalarProperty Name="StationeryName" ColumnName="StationeryName" />
+                <ScalarProperty Name="StationeryPrice" ColumnName="StationeryPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsUsers">
+            <EntityTypeMapping TypeName="DatabaseModel.MsUser">
+              <MappingFragment StoreEntitySet="MsUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserGender" ColumnName="UserGender" />
+                <ScalarProperty Name="UserDOB" ColumnName="UserDOB" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDetails">
+            <EntityTypeMapping TypeName="DatabaseModel.TransactionDetail">
+              <MappingFragment StoreEntitySet="TransactionDetail">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionHeaders">
+            <EntityTypeMapping TypeName="DatabaseModel.TransactionHeader">
+              <MappingFragment StoreEntitySet="TransactionHeader">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
