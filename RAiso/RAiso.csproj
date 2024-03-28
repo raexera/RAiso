@@ -128,6 +128,11 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CartRepository.cs" />
+    <Compile Include="Repository\DatabaseSingleton.cs" />
+    <Compile Include="Repository\StationeryRepository.cs" />
+    <Compile Include="Repository\TransactionRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\Model.edmx">
