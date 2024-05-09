@@ -97,6 +97,10 @@
     <Compile Include="Factory\TransactionDetailFactory.cs" />
     <Compile Include="Factory\TransactionHeaderFactory.cs" />
     <Compile Include="Factory\UserFactory.cs" />
+    <Compile Include="Handler\CartHandler.cs" />
+    <Compile Include="Handler\StationeryHandler.cs" />
+    <Compile Include="Handler\TransactionHandler.cs" />
+    <Compile Include="Handler\UserHandler.cs" />
     <Compile Include="Model\Cart.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
