@@ -59,7 +59,7 @@ namespace RAiso.Handler
             return total;
         }
 
-        private static int GetSubTotal(int price, int qty)
+        public static int GetSubTotal(int price, int qty)
         {
             return price * qty;
         }
