@@ -1,4 +1,5 @@
-﻿using RAiso.Model;
+﻿using RAiso.Handler;
+using RAiso.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,44 +7,49 @@ namespace RAiso.Repository
 {
     public class CartRepository
     {
-        private readonly DatabaseEntities db;
+        private static DatabaseEntities db = DatabaseSingleton.GetInstance();
 
-        public CartRepository(DatabaseEntities dbContext)
+        public static List<Cart> GetAll(int uId)
         {
-            db = dbContext;
+            return QueryCarts().Where(c => c.UserID == uId).ToList();
         }
 
-        public List<Cart> GetAll(int uId)
-        {
-            return db.Carts.Where(c => c.UserID == uId).ToList();
-        }
-
-        public void AddToCart(Cart cart)
+        public static void AddToCart(Cart cart)
         {
             db.Carts.Add(cart);
-            db.SaveChanges();
+            SaveChanges();
         }
 
-        public Cart GetCart(int uId, int sId)
+        public static Cart GetCart(int uId, int sId)
         {
-            return db.Carts.FirstOrDefault(c => c.UserID == uId && c.StationeryID == sId);
+            return QueryCarts().FirstOrDefault(c => c.UserID == uId && c.StationeryID == sId);
         }
 
-        public void UpdateCart(Cart cart, int qty)
+        public static void UpdateCart(Cart cart, int qty)
         {
             cart.Quantity = qty;
-            db.SaveChanges();
+            SaveChanges();
         }
 
-        public void DeleteCart(Cart cart)
+        public static void DeleteCart(Cart cart)
         {
             db.Carts.Remove(cart);
-            db.SaveChanges();
+            SaveChanges();
         }
 
-        public List<Cart> GetCartByStationery(int id)
+        public static List<Cart> GetCartByStationery(int id)
         {
-            return db.Carts.Where(c => c.StationeryID == id).ToList();
+            return QueryCarts().Where(c => c.StationeryID == id).ToList();
+        }
+
+        private static IQueryable<Cart> QueryCarts()
+        {
+            return db.Carts;
+        }
+
+        private static void SaveChanges()
+        {
+            db.SaveChanges();
         }
     }
 }
