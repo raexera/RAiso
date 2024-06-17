@@ -89,6 +89,17 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Admin\InsertStationeryPage.aspx" />
+    <Content Include="Views\Admin\UpdateStationeryPage.aspx" />
+    <Content Include="Views\Customer\CartPage.aspx" />
+    <Content Include="Views\Customer\TransactionDetailPage.aspx" />
+    <Content Include="Views\Customer\TransactionHistoryPage.aspx" />
+    <Content Include="Views\Customer\UpdateCartPage.aspx" />
+    <Content Include="Views\Guest\LoginPage.aspx" />
+    <Content Include="Views\Guest\RegisterPage.aspx" />
+    <Content Include="Views\HomePage.aspx" />
+    <Content Include="Views\StationeryDetailPage.aspx" />
+    <Content Include="Views\UpdateProfilePage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +152,90 @@
     <Compile Include="Repository\StationeryRepository.cs" />
     <Compile Include="Repository\TransactionRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Views\Admin\InsertStationeryPage.aspx.cs">
+      <DependentUpon>InsertStationeryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\InsertStationeryPage.aspx.designer.cs">
+      <DependentUpon>InsertStationeryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\UpdateStationeryPage.aspx.cs">
+      <DependentUpon>UpdateStationeryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Admin\UpdateStationeryPage.aspx.designer.cs">
+      <DependentUpon>UpdateStationeryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\TransactionDetailPage.aspx.cs">
+      <DependentUpon>TransactionDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\TransactionDetailPage.aspx.designer.cs">
+      <DependentUpon>TransactionDetailPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\TransactionHistoryPage.aspx.cs">
+      <DependentUpon>TransactionHistoryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\TransactionHistoryPage.aspx.designer.cs">
+      <DependentUpon>TransactionHistoryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\UpdateCartPage.aspx.cs">
+      <DependentUpon>UpdateCartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\UpdateCartPage.aspx.designer.cs">
+      <DependentUpon>UpdateCartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Guest\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Guest\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Guest\RegisterPage.aspx.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Guest\RegisterPage.aspx.designer.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Navbar.Master.cs">
+      <DependentUpon>Navbar.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Navbar.Master.designer.cs">
+      <DependentUpon>Navbar.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomePage.aspx.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StationeryDetailPage.aspx.cs">
+      <DependentUpon>StationeryDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StationeryDetailPage.aspx.designer.cs">
+      <DependentUpon>StationeryDetailPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateProfilePage.aspx.cs">
+      <DependentUpon>UpdateProfilePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateProfilePage.aspx.designer.cs">
+      <DependentUpon>UpdateProfilePage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\Model.edmx">
@@ -151,6 +246,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <Content Include="Views\Navbar.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
