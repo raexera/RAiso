@@ -12,6 +12,7 @@
                 <asp:Button ID="homeBtn" CssClass="navBtn" runat="server" Text="Home" OnClick="homeBtn_Click" />
                 <asp:Button ID="cartBtn" CssClass="navBtn" runat="server" Text="Cart" Visible="false" OnClick="cartBtn_Click" />
                 <asp:Button ID="transactionBtn" CssClass="navBtn" runat="server" Text="Transaction" Visible="false" OnClick="transactionBtn_Click" />
+                <asp:Button ID="transactionReportBtn" CssClass="navBtn" runat="server" Text="Transaction Report" Visible="false" OnClick="transactionReportBtn_Click" />
             </div>
             <div class="navItems">
                 <asp:Button ID="loginBtn" CssClass="navBtn" runat="server" Text="Login" OnClick="loginBtn_Click" />

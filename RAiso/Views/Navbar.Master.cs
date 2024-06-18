@@ -22,7 +22,11 @@ namespace RAiso.Views
                 updateProfileBtn.Visible = true;
                 logoutBtn.Visible = true;
 
-                if (role.Equals("Customer"))
+                if (role.Equals("Admin"))
+                {
+                    transactionReportBtn.Visible = true;
+                }
+                else if (role.Equals("Customer"))
                 {
                     transactionBtn.Visible = true;
                     cartBtn.Visible = true;
@@ -71,6 +75,11 @@ namespace RAiso.Views
         protected void transactionBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Customer/TransactionHistoryPage.aspx");
+        }
+
+        protected void transactionReportBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Admin/TransactionReportPage.aspx");
         }
     }
 }
